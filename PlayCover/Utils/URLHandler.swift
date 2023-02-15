@@ -62,24 +62,24 @@ struct URLHandler {
     }
 
     func processSourceURL(params: [URLQueryItem]) {
-        if let actionParam = params[0].value {
+        if let actionParam = params.first?.value {
             URLObservable.shared.type = .source
             switch actionParam {
             case "add":
                 // Add source
-                if let url = params[1].value {
+                if let url = params[safe: 1]?.value {
                     URLObservable.shared.url = url
                     URLObservable.shared.action = .add
                 }
             case "remove":
                 // Remove source
-                if let url = params[1].value {
+                if let url = params[safe: 1]?.value {
                     URLObservable.shared.url = url
                     URLObservable.shared.action = .remove
                 }
             case "update":
                 // Update source
-                if let url = params[1].value {
+                if let url = params[safe: 1]?.value {
                     URLObservable.shared.url = url
                     URLObservable.shared.action = .update
                 }
